@@ -4,6 +4,11 @@ COPY env.yaml env.yaml
 RUN . /opt/conda/etc/profile.d/conda.sh && \
         conda env create -n workshop --file=env.yaml
 
+RUN  /opt/conda/etc/profile.d/conda.sh && \
+        conda clean --all -y -f
+
+RUN rm -rf /var/lib/apt/lists/*
+
 COPY create_conda_user /opt/docker/bin/create_conda_user
 RUN chmod +x /opt/docker/bin/create_conda_user
 RUN /opt/docker/bin/create_conda_user
